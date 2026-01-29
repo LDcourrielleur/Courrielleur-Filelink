@@ -1,0 +1,178 @@
+{
+  "extensionDescription": {
+    "message": "Upload large attachments to your cloud and send the link by email"
+  },
+  "extensionName": {
+    "message": "*cloud - FileLink for Nextcloud and ownCloud"
+  },
+  "saveButton": {
+    "message": "Save"
+  },
+  "resetButton": {
+    "message": "Reset"
+  },
+  "serverUrl": {
+    "message": "Server URL"
+  },
+  "serverUrl_details": {
+    "message": "The base URL of the cloud server must start with http or https.\nIf your server runs on a non-standard port, put it into the URL."
+  },
+  "username": {
+    "message": "User name"
+  },
+  "username_details": {
+    "message": "Your user name on your cloud server"
+  },
+  "password": {
+    "message": "App token or password"
+  },
+  "password_details": {
+    "message": "An app token (preferable) or password.\nWith Nextcloud the Add-On tries to convert your password into an app token before storing it. If that fails, your password is stored unencrypted."
+  },
+  "storageFolder": {
+    "message": "Storage path in cloud"
+  },
+  "storageFolder_details": {
+    "message": "The path where attachments will be stored in your cloud. If it doesn't exist, it's created during upload."
+  },
+  "useNoDlPassword": {
+    "message": "No password"
+  },
+  "useNoDlPassword_details": {
+    "message": "No password is required for download"
+  },
+  "useGeneratedDlPassword": {
+    "message": "Use generated passwords"
+  },
+  "useGeneratedDlPassword_details": {
+    "message": "A random password will be generated for every file. Click the *cloud Status button to see and copy the generated passwords after upload."
+  },
+  "useDlPassword": {
+    "message": "Password protect downloads"
+  },
+  "oneDlPassword": {
+    "message": "One password for all downloads"
+  },
+  "useDlPassword_details": {
+    "message": "This password must comply to the rules the admin of your cloud enforces (eg. length, character set, ...). Otherwise the upload will fail. Tell this password to the recipients; they will need it to download the attachment."
+  },
+  "expiryDaysBefore": {
+    "message": "Downloads expire after "
+  },
+  "expiryDaysAfter": {
+    "message": " days"
+  },
+  "expiry_details": {
+    "message": "The number of days the download will be available, including today"
+  },
+  "noAutoDownload": {
+    "message": "Create links to the file info page, not download links"
+  },
+  "noAutoDownload_details": {
+    "message": "If you set this option, clicking the link in the message will open a page on the cloud server. This page will contain information about the file and the download link. If you don't set this option, the download will start immediately."
+  },
+  "warn_ocis_no_download_links": {
+    "message": "Your server does not support instant download links: Creating file info links"
+  },
+  "freespace": {
+    "message": "Free Space: $FREE$",
+    "placeholders": {
+      "free": {
+        "content": "$1"
+      }
+    }
+  },
+  "success": {
+    "message": "Success"
+  },
+  "error_0": {
+    "message": "Unknown error ($1)"
+  },
+  "error_typeerror": {
+    "message": "No connection. Check Server URL and network connection"
+  },
+  "error_404": {
+    "message": "Account verification failed: wrong user name or incompatible cloud or network error"
+  },
+  "warn_unsupported_cloud": {
+    "message": "Obsolete version of Nextcloud or ownCloud. You might lose data. Ask your cloud admin to update"
+  },
+  "obsolete_version": {
+    "message": "Obsolete\nversion",
+    "description": "This is displayed over the icon if the cloud version is not supported, so it should be quite short and contain at most two lines."
+  },
+  "error_401": {
+    "message": "Login failed. Check user name and password."
+  },
+  "error_503": {
+    "message": "Server is in maintenance mode. Try again later."
+  },
+  "error_sharing_off": {
+    "message": "Sharing is disabled on this cloud. Ask your admin to enable it."
+  },
+  "error_invalid_pw": {
+    "message": "Invalid download password (uploads will fail). Server says: $1"
+  },
+  "error_password_enforced": {
+    "message": "Your cloud requires a download password."
+  },
+  "warn_expiry_too_long": {
+    "message": "Your cloud admin has set a maximum expiry time of $1 days. The value was clipped, otherwise uploads would fail."
+  },
+  "warn_no_config_check": {
+    "message": "Account verification failed. Network problems?"
+  },
+  "warn_insecure_http": {
+    "message": "With http: your log-in data will be transferred unencrypted. Use https: instead. If that doesn't work, ask your admin."
+  },
+  "status_menutooltip": {
+    "message": "Show *cloud uploads status and generated passwords (if any)",
+    "description": "This is displayed as a tooltip when the mouse pointer hovers over the menu button labelled with 'status_menuname'"
+  },
+  "status_menuname": {
+    "message": "Status",
+    "description": "This short text is displayed on the menu button that opens the status popup next to the *cloud logo"
+  },
+  "status_no_uploads": {
+    "message": "No active uploads"
+  },
+  "status_button_clear": {
+    "message": "Clear complete uploads",
+    "description": "Button to remove error messages from status popup"
+  },
+  "status_preparing": {
+    "message": "Preparing",
+    "description": "This will be displayed in the status popup. If this step fails this string will be combined with one indicating failure, eg 'Preparing file size failed'."
+  },
+  "status_creating": {
+    "message": "Creating folder"
+  },
+  "status_moving": {
+    "message": "Moving conflicting file"
+  },
+  "status_uploading": {
+    "message": "Uploading"
+  },
+  "status_sharing": {
+    "message": "Sharing"
+  },
+  "status_checkingsize": {
+    "message": "Checking maximum file size"
+  },
+  "status_checkingspace": {
+    "message": "Checking free space"
+  },
+  "status_error": {
+    "message": "$1 failed",
+    "description": "This will be combined with one of the states above, eg 'Preparing failed'. If this doesn't work in your language, please tell me."
+  },
+  "status_password": {
+    "message": "password: $1"
+  },
+  "warn_nonascii_password": {
+    "message": "Your password contains characters that are likely to cause log-in problems. Use an app password instead."
+  },
+  "advanced_options": {
+    "message": "Advanced Options"
+  }
+}

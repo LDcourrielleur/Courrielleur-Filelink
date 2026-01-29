@@ -1,0 +1,48 @@
+{
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "cloud@johannes-endres.de",
+            "strict_min_version": "68.2.1"
+        }
+    },
+    "name": "__MSG_extensionName__",
+    "description": "__MSG_extensionDescription__",
+    "homepage_url": "https://gitlab.com/joendres/filelink-nextcloud#cloud-filelink-for-nextcloud-and-owncloud",
+    "author": "Johannes Endres",
+    "version": "3.17.2",
+    "icons": {
+        "48": "icon48.png"
+    },
+    "cloud_file": {
+        "name": "*cloud",
+        "management_url": "prefspane/management.html",
+        "data_format": "File",
+        "reuse_uploads": false
+    },
+    "permissions": [
+        "<all_urls>",
+        "storage",
+        "cookies"
+    ],
+    "manifest_version": 2,
+    "background": {
+        "scripts": [
+            "lib/utils.js",
+            "lib/generatePassword.js",
+            "lib/status.js",
+            "lib/davclient.js",
+            "lib/getFaviconUrl.js",
+            "lib/cloudconnection.js",
+            "lib/parsesemver.js",
+            "punycode/punycode.js",
+            "background.js"
+        ]
+    },
+    "compose_action": {
+        "default_popup": "progress/progress.html",
+        "default_label": "__MSG_status_menuname__",
+        "default_title": "__MSG_status_menutooltip__",
+        "default_icon": "icon48.png"
+    },
+    "default_locale": "en"
+}

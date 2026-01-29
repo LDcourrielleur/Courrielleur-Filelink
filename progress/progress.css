@@ -1,0 +1,22 @@
+/*
+ * Copyright (C) 2020 Johannes Endres
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+.error {
+    color: var(--red-60);
+}
+
+.hidden {
+    display: none;
+}
+
+.copy {
+    float: right;
+    margin-left: 4px;
+}
+
+td {
+    vertical-align: text-bottom;
+}

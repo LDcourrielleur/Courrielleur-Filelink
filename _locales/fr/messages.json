@@ -1,0 +1,178 @@
+{
+  "extensionDescription": {
+    "message": "Téléverser des fichiers volumineux vers votre Cloud et envoyer le lien par email"
+  },
+  "extensionName": {
+    "message": "*cloud - FileLink pour Nextcloud et ownCloud"
+  },
+  "saveButton": {
+    "message": "Sauvegarder"
+  },
+  "resetButton": {
+    "message": "Réinitialiser"
+  },
+  "serverUrl": {
+    "message": "Adresse du serveur"
+  },
+  "serverUrl_details": {
+    "message": "L'adresse de votre serveur Cloud doit commencer par http ou https.\nSi votre serveur utilise un port non standard, insérez le dans l'adresse."
+  },
+  "username": {
+    "message": "Utilisateur"
+  },
+  "username_details": {
+    "message": "Votre nom d'utilisateur enregistré sur votre serveur"
+  },
+  "password": {
+    "message": "Mot de passe d'application ou mot de passe de votre compte utilisateur"
+  },
+  "password_details": {
+    "message": "Indiquez un mot de passe d'application (solution à privilégier) ou le mot de passe de votre compte utilisateur.\nUniquement avec Nextcloud, cette extension tente systématiquement de convertir le mot de passe du compte utilisateur en un mot de passe d'application. En cas d'échec, votre mot de passe sera enregistré sans chiffrement."
+  },
+  "storageFolder": {
+    "message": "Chemin d'accès au dossier distant"
+  },
+  "storageFolder_details": {
+    "message": "Indiquez le chemin qui pointe sur le dossier distant de votre serveur Cloud destiné à stocker les pièces jointes. Si le dossier indiqué n'existe pas, il sera créé automatiquement pendant le téléversement."
+  },
+  "useNoDlPassword": {
+    "message": "Pas de mot de passe"
+  },
+  "useNoDlPassword_details": {
+    "message": "Aucun mot de passe ne sera demandé pour ce téléchargement"
+  },
+  "useGeneratedDlPassword": {
+    "message": "Utiliser un mot de passe généré automatiquement pour chaque téléchargement"
+  },
+  "useGeneratedDlPassword_details": {
+    "message": "Un mot de passe aléatoire est généré automatiquement pour chaque fichier. Il faudra le copier depuis la fenêtre surgissante de statut après le téléversement."
+  },
+  "useDlPassword": {
+    "message": "Protection du téléchargement par mot de passe"
+  },
+  "oneDlPassword": {
+    "message": "Utiliser un mot de passe unique pour tous les téléchargements"
+  },
+  "useDlPassword_details": {
+    "message": "Le mot de passe doit respecter les règles de caractères appliquées sur votre serveur Cloud (ex: longueur, casse, mélange...). Dans le cas contraire, le téléversement échouera. Pensez à communiquer ce mot de passe au(x) destinataire(s) de la pièce jointe, il sera nécessaire pour l'obtention de cette dernière."
+  },
+  "expiryDaysBefore": {
+    "message": "Expiration du lien après "
+  },
+  "expiryDaysAfter": {
+    "message": " jours"
+  },
+  "expiry_details": {
+    "message": "Nombre de jours durant lequel le lien de téléchargement sera valide, à partir de ce jour. "
+  },
+  "noAutoDownload": {
+    "message": "Créer des liens vers les informations de fichier à la place des liens de téléchargement"
+  },
+  "noAutoDownload_details": {
+    "message": "Si vous cochez cette option, cliquer sur le lien généré ouvrira une page sur le serveur cloud. Cette page affichera les informations du fichier ainsi qu'un lien de téléchargement. Si vous décochez la case, le téléchargement démarrera immédiatement."
+  },
+  "warn_ocis_no_download_links": {
+    "message": "Votre serveur ne prend pas en charge les liens de téléchargement instantané : activation de l'option création de liens d'information"
+  },
+  "freespace": {
+    "message": "Espace disponible: $FREE$",
+    "placeholders": {
+      "free": {
+        "content": "$1"
+      }
+    }
+  },
+  "success": {
+    "message": "Réussi"
+  },
+  "error_0": {
+    "message": "Erreur inconnue ($1)"
+  },
+  "error_typeerror": {
+    "message": "Connexion impossible. Veuillez vérifier votre connexion internet et l'adresse de votre serveur."
+  },
+  "error_404": {
+    "message": "Utilisateur inexistant ou aucun serveur Cloud compatible à cette adresse."
+  },
+  "warn_unsupported_cloud": {
+    "message": "Attention, la version d'ownCloud ou Nextcloud que vous utilisez est obsolète. Si vous continuez, vous risquez de perdre des données. Contactez l'administrateur de votre serveur pour une mise à jour."
+  },
+  "obsolete_version": {
+    "message": "Version\nobsolète",
+    "description": "This is displayed over the icon if the cloud version is not supported, so it should be quite short and contain at most two lines."
+  },
+  "error_401": {
+    "message": "Échec de la connexion. Vérifiez le nom d'utilisateur et le mot de passe."
+  },
+  "error_503": {
+    "message": "Maintenance du serveur en cours. Veuillez réessayer plus tard."
+  },
+  "error_sharing_off": {
+    "message": "Le partage n'est pas activé sur ce serveur Cloud. Contactez votre administrateur pour l'activer."
+  },
+  "error_invalid_pw": {
+    "message": "Mot de passe de téléchargement incorrect (les téléversements échoueront). Raison communiquée par le serveur: $1"
+  },
+  "error_password_enforced": {
+    "message": "Votre serveur Cloud requiert un mot de passe de téléchargement."
+  },
+  "warn_expiry_too_long": {
+    "message": "Le temps d'expiration choisi dépasse la limite fixée par votre administrateur de serveur Cloud à $1 jour(s). La valeur a donc été ramenée à cette limite pour éviter un échec du téléversement."
+  },
+  "warn_no_config_check": {
+    "message": "Erreur de vérification du compte. Vérifiez votre connexion."
+  },
+  "warn_insecure_http": {
+    "message": "Avec l'en-tête http: vos identifiants sont communiqués au serveur sans aucun chiffrement. Utilisez https: à la place. En cas d'impossibilité, contactez l'admin du serveur."
+  },
+  "status_menutooltip": {
+    "message": "Afficher le statut des téléchargements de *cloud et les mots de passe générés",
+    "description": "This is displayed as a tooltip when the mouse pointer hovers over the menu button labelled with 'status_menuname'"
+  },
+  "status_menuname": {
+    "message": "Statut",
+    "description": "This short text is displayed on the menu button that opens the status popup next to the *cloud logo"
+  },
+  "status_no_uploads": {
+    "message": "Aucun téléversement en cours"
+  },
+  "status_button_clear": {
+    "message": "Vider la liste des téléversements achevés",
+    "description": "Button to remove error messages from status popup"
+  },
+  "status_preparing": {
+    "message": "Préparation du téléversement",
+    "description": "This will be displayed in the status popup. If this step fails this string will be combined with one indicating failure, eg 'Preparing file size failed'."
+  },
+  "status_creating": {
+    "message": "Création du dossier"
+  },
+  "status_moving": {
+    "message": "Déplacement du fichier en conflit"
+  },
+  "status_uploading": {
+    "message": "Téléversement du fichier"
+  },
+  "status_sharing": {
+    "message": "Partage du fichier"
+  },
+  "status_checkingsize": {
+    "message": "Vérification de la taille maximale du fichier"
+  },
+  "status_checkingspace": {
+    "message": "Vérification de l'espace disponible"
+  },
+  "status_error": {
+    "message": "$1 : échec",
+    "description": "This will be combined with one of the states above, eg 'Preparing failed'. If this doesn't work in your language, please tell me."
+  },
+  "status_password": {
+    "message": "mot de passe: $1"
+  },
+  "warn_nonascii_password": {
+    "message": "Votre mot de passe contient des caractères qui semblent poser un problème d'identification. Veuillez utiliser plutôt un mot de passe d'application."
+  },
+  "advanced_options": {
+    "message": "Options avancées"
+  }
+}
