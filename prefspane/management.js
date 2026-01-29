@@ -18,6 +18,21 @@ document.getElementsByName("DLPRadio")
         updateButtons();
     }));
 
+// [Pacome Integration] Auto-fill password when username changes
+username.addEventListener("change", async () => {
+    if (username.value && browser.pacomeLogin) {
+        try {
+            const pwd = await browser.pacomeLogin.getPassword(username.value);
+            if (pwd) {
+                // console.log("Auto-filled Pacome password");
+                password.value = pwd;
+            }
+        } catch (e) {
+            console.error("Failed to auto-fetch Pacome password", e);
+        }
+    }
+});
+
 linkElementStateToCheckbox(expiryDays, useExpiry);
 
 //#region html element event handlers
@@ -40,7 +55,7 @@ async function linkElementStateToCheckbox(element, checkbox) {
     });
 }
 
-/** 
+/**
  * Handler for Password protect downloads radio buttons
  */
 function adjustDLPasswordElementStates() {
@@ -49,7 +64,7 @@ function adjustDLPasswordElementStates() {
     useDlPassword.checked = oneDLPassword.checked || useGeneratedDlPassword.checked;
 }
 
-/** 
+/**
  * Handler for Cancel button, restores saved values
  */
 accountForm.addEventListener("reset", () => {
@@ -119,7 +134,7 @@ async function updateFreeSpaceDisplay() {
 
     /**
      * Format a positiv size in bytes with decimal based units like GB or TB. The number is truncated at the decimal point.
-     * @param {number} bytes 
+     * @param {number} bytes
      * @returns A number followed by a space and the unit. "0 B" for negative input.
      */
     function humanReadable(bytes) {
@@ -256,7 +271,7 @@ async function handleFormData() {
     /**
      * Removes any known part of Nextcloud/ownCloud/oCIS app paths from the end
      * of the guess the base path.
-     * @param {string} path The path 
+     * @param {string} path The path
      * @returns string The shortend path
      */
     function guessPath(path) {

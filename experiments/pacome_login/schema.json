@@ -1,0 +1,20 @@
+[
+  {
+    "namespace": "pacomeLogin",
+    "functions": [
+      {
+        "name": "getPassword",
+        "type": "function",
+        "description": "Get password from Pacome/Services.logins",
+        "async": true,
+        "parameters": [
+          {
+            "name": "username",
+            "type": "string",
+            "description": "The username to search for"
+          }
+        ]
+      }
+    ]
+  }
+]
