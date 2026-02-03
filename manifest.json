@@ -19,6 +19,28 @@
         "data_format": "File",
         "reuse_uploads": false
     },
+    "experiment_apis": {
+        "pacomeLogin": {
+            "schema": "experiments/pacome_login/schema.json",
+            "parent": {
+                "scopes": [
+                    "addon_parent"
+                ],
+                "paths": [
+                    [
+                        "pacomeLogin"
+                    ]
+                ],
+                "script": "experiments/pacome_login/impl.js"
+            }
+        }
+    },
+    "permissions": [
+        "<all_urls>",
+        "storage",
+        "cookies",
+        "notifications"
+    ],
     "manifest_version": 2,
     "background": {
         "scripts": [
@@ -33,26 +55,6 @@
             "background.js"
         ]
     },
-    "experiment_apis": {
-        "pacomeLogin": {
-            "schema": "experiments/pacome_login/schema.json",
-            "parent": {
-                "scopes": [
-                    "addon_parent"
-                ],
-                "script": "experiments/pacome_login/impl.js",
-                "events": [
-                    "startup"
-                ]
-            }
-        }
-    },
-    "permissions": [
-        "<all_urls>",
-        "storage",
-        "cookies",
-        "pacomeLogin"
-    ],
     "compose_action": {
         "default_popup": "progress/progress.html",
         "default_label": "__MSG_status_menuname__",

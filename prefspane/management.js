@@ -21,14 +21,17 @@ document.getElementsByName("DLPRadio")
 // [Pacome Integration] Auto-fill password when username changes
 username.addEventListener("change", async () => {
     if (username.value && browser.pacomeLogin) {
+        console.log("Pacome Integration: Username changed to " + username.value + ". Attempting to fetch password via Pacome.");
         try {
             const pwd = await browser.pacomeLogin.getPassword(username.value);
             if (pwd) {
-                // console.log("Auto-filled Pacome password");
+                console.log("Pacome Integration: Password successfully retrieved and auto-filled.");
                 password.value = pwd;
+            } else {
+                console.log("Pacome Integration: No password found for this user.");
             }
         } catch (e) {
-            console.error("Failed to auto-fetch Pacome password", e);
+            console.error("Pacome Integration: Failed to auto-fetch Pacome password", e);
         }
     }
 });
@@ -182,6 +185,12 @@ function showErrors() {
 async function loadFormData() {
     await ncc.load();
 
+    // [Pacome Integration] Force default server URL if not set
+    if (!ncc.serverUrl) {
+        console.log("Pacome Integration: Server URL not set. Injecting default URL: https://bnum.din.gouv.fr/mdrive");
+        ncc.serverUrl = "https://bnum.din.gouv.fr/mdrive";
+    }
+
     document.querySelectorAll("input")
         .forEach(inp => {
             if (inp.type === "checkbox" || inp.type === "radio") {
@@ -205,6 +214,10 @@ async function loadFormData() {
     adjustDLPasswordElementStates();
 
     ocisHasNoDownloadLinks();
+
+    // [Pacome Integration] Trigger validation to enable Save button after auto-config
+    // This ensures the Save button is enabled when data is loaded programmatically
+    updateButtons();
 }
 //#endregion
 

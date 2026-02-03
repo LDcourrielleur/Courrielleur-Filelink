@@ -14,6 +14,31 @@
             "description": "The username to search for"
           }
         ]
+      },
+      {
+        "name": "createAccount",
+        "type": "function",
+        "description": "Create a new Filelink account",
+        "async": true,
+        "parameters": [
+          {
+            "name": "type",
+            "type": "string",
+            "description": "The type/id of the cloud provider"
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "description": "The display name for the account"
+          }
+        ]
+      },
+      {
+        "name": "findCredentials",
+        "type": "function",
+        "description": "Find any credentials for the hardcoded Melanie2 server",
+        "async": true,
+        "parameters": []
       }
     ]
   }

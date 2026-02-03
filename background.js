@@ -1,12 +1,112 @@
-// Copyright (C) 2020 Johannes Endres
-//
-// SPDX-License-Identifier: MIT
+console.log("[Pacome Debug] background.js started v6 - Workflow Automation");
 
-messenger.cloudFile.getAllAccounts()
-    .then(
-        allAccounts => {
-            allAccounts.forEach(account => updateAccount(account.id));
+// Option C: Automatisation du Workflow de Configuration
+// L'utilisateur crée le compte manuellement UNE FOIS, ensuite auto-config instantanée
+
+async function showFirstTimeSetupNotification() {
+    console.log("[Pacome Debug] Showing first-time setup notification");
+
+    // Check if we've shown this before
+    const { firstTimeSetupShown } = await browser.storage.local.get("firstTimeSetupShown");
+
+    if (!firstTimeSetupShown) {
+        console.log("[Pacome Debug] First time - showing setup instructions");
+
+        // Show notification with action button
+        const notificationId = await messenger.notifications.create({
+            type: "basic",
+            iconUrl: "icon48.png",
+            title: "Configuration Filelink Melanie2",
+            message: "Pour activer Filelink, ajoutez un compte Nextcloud dans les paramètres (1 clic). L'extension configurera automatiquement vos identifiants Pacome.",
+            eventTime: Date.now()
         });
+
+        // Mark as shown
+        await browser.storage.local.set({ firstTimeSetupShown: true });
+
+        console.log(`[Pacome Debug] Notification created: ${notificationId}`);
+    }
+}
+
+async function autoConfigureAccount(accountId) {
+    console.log(`[Pacome Debug] Auto-configuring account ${accountId}...`);
+
+    const ncc = new CloudConnection(accountId);
+    await ncc.load();
+
+    // Check if account needs configuration
+    const needsConfig = !ncc.serverUrl || !ncc.username;
+
+    if (needsConfig && browser.pacomeLogin) {
+        console.log(`[Pacome Debug] Account ${accountId} needs configuration. Fetching Pacome credentials...`);
+
+        try {
+            const creds = await browser.pacomeLogin.findCredentials();
+            if (creds) {
+                console.log(`[Pacome Debug] Found Pacome credentials for ${creds.username}`);
+
+                // Auto-configure with Pacome credentials and hardcoded URL
+                ncc.serverUrl = "https://bnum.din.gouv.fr/mdrive/";
+                ncc.username = creds.username;
+                // Password fetched dynamically by load() via pacomeLogin
+                ncc.storageFolder = "/";
+                ncc.useDlPassword = false;
+                ncc.useExpiry = false;
+
+                await ncc.store();
+
+                // Verify connection and update capabilities
+                console.log("[Pacome Debug] Verifying connection...");
+                const answer = await ncc.updateUserId();
+                if (!answer._failed) {
+                    await Promise.all([
+                        ncc.updateFreeSpaceInfo(),
+                        ncc.updateCapabilities()
+                    ]);
+                    await ncc.updateConfigured();
+
+                    console.log(`[Pacome Debug] ✅ Account ${accountId} auto-configured successfully!`);
+
+                    // Show success notification
+                    await messenger.notifications.create({
+                        type: "basic",
+                        iconUrl: "icon48.png",
+                        title: "Filelink Melanie2 configuré",
+                        message: `Compte configuré automatiquement pour ${creds.username}. Vous pouvez maintenant utiliser Filelink !`,
+                        eventTime: Date.now()
+                    });
+                } else {
+                    console.error(`[Pacome Debug] Connection verification failed: ${answer.status}`);
+                    ncc.laststatus = answer.status;
+                }
+
+                await ncc.store();
+
+            } else {
+                console.log("[Pacome Debug] No Pacome credentials found. Cannot auto-configure.");
+            }
+        } catch (e) {
+            console.error(`[Pacome Debug] Auto-configuration failed for ${accountId}:`, e);
+        }
+    } else if (!needsConfig) {
+        console.log(`[Pacome Debug] Account ${accountId} already configured.`);
+    }
+}
+
+// Initialize on startup
+messenger.cloudFile.getAllAccounts().then(async allAccounts => {
+    console.log(`[Pacome Debug] getAllAccounts returned ${allAccounts.length} accounts`);
+
+    if (allAccounts.length === 0) {
+        // No accounts - show first-time setup notification
+        await showFirstTimeSetupNotification();
+    } else {
+        // Check each account and auto-configure if needed
+        for (let account of allAccounts) {
+            await autoConfigureAccount(account.id);
+        }
+    }
+});
 
 // If the current TB version does not support button labels, it uses the title instead
 if (!messenger.composeAction.setLabel) {
@@ -22,6 +122,7 @@ if (!messenger.composeAction.setLabel) {
 }
 
 messenger.cloudFile.onFileUpload.addListener(async (account, { id, name, data }) => {
+    console.log(`[Pacome Debug] onFileUpload triggered for account ${account.id}, file ${name}`);
     const ncc = new CloudConnection(account.id);
     await ncc.load();
     return ncc.uploadFile(makeUploadId(account, id), name, data);
@@ -44,15 +145,20 @@ messenger.cloudFile.onFileDeleted.addListener(
         Status.remove(makeUploadId(account, fileId));
     });
 
-/** Nothing to be done, so don't add a listener */
-// messenger.cloudFile.onAccountAdded.addListener(async account => { */
+/** Auto-configure newly added accounts */
+messenger.cloudFile.onAccountAdded.addListener(async account => {
+    console.log(`[Pacome Debug] ✨ New account added: ${account.id}`);
+    await autoConfigureAccount(account.id);
+});
 
 messenger.cloudFile.onAccountDeleted.addListener(accountId => {
+    console.log(`[Pacome Debug] onAccountDeleted triggered for account ${accountId}`);
     const ncc = new CloudConnection(accountId);
     ncc.deleteAccount();
 });
 
 async function updateAccount(accountId) {
+    console.log(`[Pacome Debug] updateAccount called for ${accountId}`);
     const ncc = new CloudConnection(accountId);
     await ncc.load();
     upgradeOldConfigurations();
