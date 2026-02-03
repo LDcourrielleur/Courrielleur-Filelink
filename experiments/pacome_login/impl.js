@@ -57,39 +57,20 @@ var pacomeLogin = class extends ExtensionCommon.ExtensionAPI {
             pacomeLogin: {
                 async getPassword(username) {
                     console.log(`[Pacome Experiment] getPassword called for: ${username}`);
+                    const FILELINK_REALM = "filelink-nextcloud-melanie2";
+                    const FILELINK_ORIGIN = "https://bnum.din.gouv.fr";
+
                     try {
-                        // Pacome stores passwords with specific origins and realms
-                        // Extract realm from username (format: user.-.PARTAGE → realm: user)
-                        let pacomeRealm = username.split(".-.")[0];
-                        console.log(`[Pacome Experiment] Searching for realm: ${pacomeRealm}`);
-
-                        // Try various origin patterns that Pacome might use
-                        const origins = [
-                            "imap://amelie.s2.m2.e2.rie.gouv.fr",
-                            "https://amelie.s2.m2.e2.rie.gouv.fr",
-                            "https://bnum.din.gouv.fr"
-                        ];
-
-                        for (let origin of origins) {
-                            try {
-                                // Try with specific realm
-                                let logins = Services.logins.findLogins(origin, null, pacomeRealm);
-                                if (logins.length > 0) {
-                                    console.log(`[Pacome Experiment] Found password for ${username} via realm ${pacomeRealm} at ${origin}`);
-                                    return logins[0].password;
-                                }
-
-                                // Try wildcard realm
-                                logins = Services.logins.findLogins(origin, null, null);
-                                let match = logins.find(l => l.username === username || l.username === pacomeRealm);
-                                if (match) {
-                                    console.log(`[Pacome Experiment] Found password for ${username} via wildcard at ${origin}`);
-                                    return match.password;
-                                }
-                            } catch (e) { }
+                        // Read from Pacome's filelink realm
+                        // Pacome ALWAYS saves here, even if user doesn't check "remember password"
+                        let logins = Services.logins.findLogins(FILELINK_ORIGIN, null, FILELINK_REALM);
+                        let match = logins.find(l => l.username === username);
+                        if (match) {
+                            console.log(`[Pacome Experiment] Found password in filelink realm for ${username}`);
+                            return match.password;
                         }
 
-                        console.log(`[Pacome Experiment] No password found for ${username}`);
+                        console.log(`[Pacome Experiment] No password found in filelink realm for ${username}`);
                         return null;
                     } catch (e) {
                         console.error("[Pacome Experiment] getPassword error:", e);
@@ -175,22 +156,27 @@ var pacomeLogin = class extends ExtensionCommon.ExtensionAPI {
                 },
 
                 async findCredentials() {
+                    console.log("[Pacome Experiment] findCredentials called");
+                    const FILELINK_REALM = "filelink-nextcloud-melanie2";
+                    const FILELINK_ORIGIN = "https://bnum.din.gouv.fr";
+
                     try {
-                        let MailServices;
-                        try { ({ MailServices } = ChromeUtils.importESModule("resource:///modules/MailServices.sys.mjs")); }
-                        catch (e) { try { ({ MailServices } = ChromeUtils.import("resource:///modules/MailServices.jsm")); } catch (e2) { if (typeof ((window || this).MailServices) !== 'undefined') MailServices = (window || this).MailServices; } }
-
-                        if (!MailServices) return null;
-
-                        let allServers = MailServices.accounts.allServers;
-                        for (let server of allServers) {
-                            if (!server.username) continue;
-                            let pacomeRealm = server.username.split(".-.")[0];
-                            let logins = Services.logins.findLogins(`imap://${server.hostName}`, null, pacomeRealm);
-                            if (logins.length > 0) return { username: logins[0].username, password: logins[0].password };
+                        // Read from Pacome's filelink realm
+                        let logins = Services.logins.findLogins(FILELINK_ORIGIN, null, FILELINK_REALM);
+                        if (logins.length > 0) {
+                            console.log(`[Pacome Experiment] Found credentials in filelink realm for ${logins[0].username}`);
+                            return {
+                                username: logins[0].username,
+                                password: logins[0].password
+                            };
                         }
+
+                        console.log("[Pacome Experiment] No credentials found in filelink realm");
                         return null;
-                    } catch (e) { return null; }
+                    } catch (e) {
+                        console.error("[Pacome Experiment] findCredentials error:", e);
+                        return null;
+                    }
                 }
             },
         };
