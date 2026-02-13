@@ -14,7 +14,7 @@
         "48": "icon48.png"
     },
     "cloud_file": {
-        "name": "*cloud",
+        "name": "Mdrive",
         "management_url": "prefspane/management.html",
         "data_format": "File",
         "reuse_uploads": false

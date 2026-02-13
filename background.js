@@ -49,7 +49,7 @@ async function autoConfigureAccount(accountId) {
                 ncc.serverUrl = "https://bnum.din.gouv.fr/mdrive/";
                 ncc.username = creds.username;
                 // Password fetched dynamically by load() via pacomeLogin
-                ncc.storageFolder = "/";
+                ncc.storageFolder = "/Pièces Jointes";
                 ncc.useDlPassword = false;
                 ncc.useExpiry = false;
 
