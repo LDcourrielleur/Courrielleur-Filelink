@@ -88,6 +88,9 @@
   "warn_unsupported_cloud": {
     "message": "過時的Nextcloud或ownCloud版本。您可能會丟失資料。請向您的雲端管理員詢問更新"
   },
+  "status_quota_exceeded": {
+    "message": "Insufficient MDrive storage space."
+  },
   "obsolete_version": {
     "description": "This is displayed over the icon if the cloud version is not supported, so it should be quite short and contain at most two lines.",
     "message": "過時\n版本"

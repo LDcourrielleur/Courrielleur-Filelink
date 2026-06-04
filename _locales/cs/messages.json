@@ -97,6 +97,9 @@
   "warn_unsupported_cloud": {
     "message": "Verze Nextcloud nebo ownCloud serveru je zastaralá a mohlo by dojít ke ztrátě dat. Požádejte svého správce cloud serveru o aktualizaci"
   },
+  "status_quota_exceeded": {
+    "message": "Insufficient MDrive storage space."
+  },
   "obsolete_version": {
     "message": "Zastaralá\nverze",
     "description": "This is displayed over the icon if the cloud version is not supported, so it should be quite short and contain at most two lines."

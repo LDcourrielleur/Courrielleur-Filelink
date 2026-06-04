@@ -67,8 +67,9 @@ function fill_status_row(status, row) {
     const status_cell = status_lines.rows[row].cells[1];
     if (status.error) {
         status_cell.classList.add('error');
-        status_cell.textContent =
-            browser.i18n.getMessage('status_error',
+        status_cell.textContent = status.errorReason
+            ? browser.i18n.getMessage(`status_${status.errorReason}`)
+            : browser.i18n.getMessage('status_error',
                 browser.i18n.getMessage(`status_${status.status}`));
     } else if (status.status === 'uploading') {
         let progress;

@@ -97,6 +97,9 @@
   "warn_unsupported_cloud": {
     "message": "Versione obsoleta di Nextcloud o ownCloud. Potresti perdere dati. Chiedere all'amministratore del cloud di aggiornare"
   },
+  "status_quota_exceeded": {
+    "message": "Insufficient MDrive storage space."
+  },
   "obsolete_version": {
     "message": "Versione\nobsoleta",
     "description": "This is displayed over the icon if the cloud version is not supported, so it should be quite short and contain at most two lines."
