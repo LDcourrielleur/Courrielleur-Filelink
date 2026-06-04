@@ -170,9 +170,11 @@ function showErrors() {
         if (ncc.invalid_downloadpassword_reason) {
             popup.error('invalid_pw', ncc.invalid_downloadpassword_reason);
         }
-        if (false === ncc.cloud_supported) {
-            popup.warn('unsupported_cloud');
-        }
+        // Message désactivé : la vérification de version reste active mais
+        // le popup d'avertissement n'est plus affiché aux utilisateurs.
+        // if (false === ncc.cloud_supported) {
+        //     popup.warn('unsupported_cloud');
+        // }
         if (serverUrl.value.startsWith("http:")) {
             popup.warn("insecure_http");
         }
