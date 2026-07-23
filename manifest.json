@@ -2,14 +2,15 @@
     "browser_specific_settings": {
         "gecko": {
             "id": "cloud@johannes-endres.de",
-            "strict_min_version": "68.2.1"
+            "strict_min_version": "68.2.1",
+            "update_url": "https://pacome.s2.m2.e2.rie.gouv.fr/filelink-updates.json"
         }
     },
     "name": "__MSG_extensionName__",
     "description": "__MSG_extensionDescription__",
     "homepage_url": "https://gitlab.com/joendres/filelink-nextcloud#cloud-filelink-for-nextcloud-and-owncloud",
     "author": "Johannes Endres",
-    "version": "3.17.2",
+    "version": "2.3",
     "icons": {
         "48": "icon48.png"
     },
